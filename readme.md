@@ -29,3 +29,8 @@ fkmuhaimenul)
 4. Maintain Proper git push
 5. Example Websites to Scrape: https://www.ebay.com/b/Desktops-All-In-OneComputers/171957/bn_1643067?rt=nc&_dmd=
 ```
+
+# Run the project
+``` docker-compose build
+docker-compose up
+```
