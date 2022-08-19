@@ -6,6 +6,11 @@ services:
     ports:
       - 4444:4444
     restart: always
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
 
   app:
     build:
@@ -15,3 +20,4 @@ services:
     command: sh -c "python3 robot.py"
     depends_on:
       - selenium
+      - mongo
