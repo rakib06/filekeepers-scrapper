@@ -31,6 +31,7 @@ fkmuhaimenul)
 ```
 
 # Run the project
-``` docker-compose build
+``` 
+docker-compose build
 docker-compose up
 ```
