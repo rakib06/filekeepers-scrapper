@@ -17,7 +17,7 @@ services:
       context: .
     volumes:
       - ./app:/app
-    command: sh -c "python3 robot.py"
+    command: sh -c "python3 test_setup.py"
     depends_on:
       - selenium
       - mongo
