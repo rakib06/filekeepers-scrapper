@@ -1,0 +1,9 @@
+from selenium.webdriver.common.by import By
+from utils.config.env import *
+
+
+class SearchResultPageLocators:
+    URL = URL
+    ITEM_NAME = (By.XPATH, ITEM_XPATH)
+    ITEM_PRICE = (By.XPATH, PRICE_XPATH)
+    NEXT_PAGE_BUTTON = (By.XPATH, NEXT_PAGE_XPATH)
