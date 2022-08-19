@@ -1,8 +1,11 @@
 app/.env
 ```env
 USE_DOCKER = True
-URL = https://google.com
+URL = https://www.ebay.com/b/Desktops-All-In-One-Computers/171957/bn_1643067?_dmd
 SCREENSHOT_DIR = local/screenshot/
 LOGS_DIR = local/logs/ 
-DATA_DIR = local/data/ 
+DATA_DIR = local/data/
+ITEM_XPATH = "*//h3[@class= 's-item__title s-item__title--has-tags' or @class= 's-item__title']"
+PRICE_XPATH = "*//span[@class='s-item__price']"
+NEXT_PAGE_XPATH = "//*[@class='pagination__next icon-link']"
 ```
