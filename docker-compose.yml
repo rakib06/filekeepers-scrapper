@@ -17,7 +17,7 @@ services:
       context: .
     volumes:
       - ./app:/app
-    command: sh -c "python3 test_setup.py"
+    command: sh -c "python3 main_remote.py"
     depends_on:
       - selenium
       - mongo

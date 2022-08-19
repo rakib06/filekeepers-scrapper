@@ -1,4 +1,5 @@
 from selenium.webdriver.support.ui import WebDriverWait
+from time import sleep
 
 
 class BasePage:
@@ -7,11 +8,13 @@ class BasePage:
         self.driver = driver
 
     def get_elements(self, *by):
+        sleep(1)
         elements = WebDriverWait(self.driver, 30).until(
             lambda driver: self.driver.find_elements(*by))
         return elements
 
     def get_element(self, *by):
+        sleep(1)
         element = WebDriverWait(self.driver, 30).until(
             lambda driver: self.driver.find_element(*by))
         return element

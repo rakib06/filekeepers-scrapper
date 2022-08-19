@@ -34,12 +34,12 @@ class SearchPage(BasePage):
         else:
             return None
 
-    def save_item_price_pair(self):
+    def save_item_price_pair(self, filename="test.txt"):
         if self.get_item_price_pair() is None:
             print("No item-price pair found!")
             return
         for item in self.get_item_price_pair():
-            with open('XXXitems__11.txt', 'a+') as f:
+            with open(filename, 'a+') as f:
                 try:
                     x = str(self.i) + ". " + item[0].text + \
                         ": Price = " + item[1].text + "\n"

@@ -1,3 +1,4 @@
 selenium==3
 python-dotenv==0.20.0
 pymongo
+webdriver_manager
