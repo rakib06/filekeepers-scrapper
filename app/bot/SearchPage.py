@@ -8,7 +8,7 @@ class SearchPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver.get(SearchResultPageLocators.URL)
-        self.i = 1
+        self.i = 0
 
     def get_total_items(self):
         self.item_name_list = self.get_elements(
@@ -79,6 +79,7 @@ class SearchPage(BasePage):
         for item in self.item_box:
             print('-'*100, item, type(item))
             try:
+                self.i += 1
                 id_, name, price = str(self.i), item.find_element(
                     *SearchResultPageLocators.ITEM_NAME).text, item.find_element(*SearchResultPageLocators.ITEM_PRICE).text
 
@@ -91,8 +92,6 @@ class SearchPage(BasePage):
 
             except Exception as e:
                 print(e)
-
-            self.i += 1
 
         # Insert
         try:
