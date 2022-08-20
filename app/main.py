@@ -23,13 +23,14 @@ x = SearchPage(driver)
 # driver.maximize_window()
 
 page_count = 1
-max_page_count = 2
+# max_page_count = 2
 
 total_result = x.get_total_results()
 
 try:
 
-    while (x.is_next_page_button_found() and page_count < max_page_count):
+    # while (x.is_next_page_button_found() and page_count < max_page_count):
+    while (x.is_next_page_button_found()):
         scrap_msg = f"Page {page_count}: scraping started"
         logger.info(scrap_msg)
         x.insert_item_price_pair_into_mongo_db()
