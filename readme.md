@@ -1,8 +1,7 @@
 # Project details
 
 ### This bot will collect data (item and it's price) from the following site... 
-
-![image](https://user-images.githubusercontent.com/34921424/185757398-6497344e-3a6d-45c5-8354-99efe02ce848.png)
+![image](https://user-images.githubusercontent.com/34921424/185757751-241ac38c-b091-46e3-8c4a-c0050a5614b6.png)
 
 
 # Project Installation
