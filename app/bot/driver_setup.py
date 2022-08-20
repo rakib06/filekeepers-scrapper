@@ -13,9 +13,11 @@ def local():
 
 def docker_remote():
     time.sleep(5)
-    # chrome_options = Options()
-    # chrome_options.add_argument('--no-sandbox')
+    desired_capabilities = DesiredCapabilities.CHROME
+    desired_capabilities['chromeOptions'] = {
+        "args": ["--no-sandbox"],
+    }
     driver = webdriver.Remote('http://selenium:4444/wd/hub',
-                              desired_capabilities=DesiredCapabilities.CHROME,
+                              desired_capabilities=desired_capabilities
                               )
     return driver

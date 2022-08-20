@@ -1,5 +1,6 @@
 from bot.base import BasePage
 from bot.locators import SearchResultPageLocators
+from utils.db import insert
 
 
 class SearchPage(BasePage):
@@ -34,6 +35,12 @@ class SearchPage(BasePage):
         else:
             return None
 
+    def get_total_results(self):
+        x = self.get_element(
+            *SearchResultPageLocators.TOTAL_RESULT_FOUND).text
+        total = int(x.split(' ')[0].replace(',', ''))
+        return total
+
     def save_item_price_pair(self, filename="test.txt"):
         if self.get_item_price_pair() is None:
             print("No item-price pair found!")
@@ -51,6 +58,33 @@ class SearchPage(BasePage):
                 except Exception as e:
                     print(e)
             self.i += 1
+
+    def insert_item_price_pair_into_mongo_db(self, site="ebay"):
+        if self.get_item_price_pair() is None:
+            print("No item-price pair found!")
+            return
+
+        cols = []
+        for item in self.get_item_price_pair():
+            try:
+                id_, name, price = str(self.i), item[0].text, item[1].text
+                name, price = name.encode(
+                    "ascii", "ignore"), price.encode("ascii", "ignore")
+                name, price = name.decode(), price.decode()
+                temp = {"id": id_, "item_name": name,
+                        "price": price, "site": site}
+                cols.append(temp)
+
+            except Exception as e:
+                print(e)
+            self.i += 1
+
+        # Insert
+        try:
+            # insert.insert(data=cols, db_name='ebay_db', collection_name='items')
+            insert.insert(data=cols)
+        except Exception as e:
+            print(e)
 
     def is_next_page_button_found(self):
         try:
