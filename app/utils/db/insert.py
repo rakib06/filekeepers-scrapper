@@ -4,10 +4,9 @@ from utils.db.conn import *
 from utils.log import log_manager
 import pymongo
 
-
 myclient, mydb, mycol = connection()
 
-logger = log_manager.app_logger()
+logger = log_manager.db_logger()
 
 
 def insert_test():
@@ -24,8 +23,8 @@ def insert(data, db_name='ebay_db', collection_name='items'):
     collection = db[collection_name]
     x = collection.insert_many(data)
 
-    msg = f"inserted_ids= {x.inserted_ids}"
-    with open(DATA_DIR+'inserted_ids.txt', 'w+') as f:
-        f.write(msg)
+    msg = f"inserted_ids= {x.inserted_ids}\n"
+    # with open(DATA_DIR+'inserted_ids.txt', 'w+') as f:
+    #     f.write(msg)
 
     logger.info(f"Mongo Insert: {msg}")

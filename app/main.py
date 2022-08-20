@@ -6,10 +6,12 @@ from utils.folders import make_dir_if_not_exits
 from utils.log import log_manager
 
 logger = log_manager.app_logger()
+
+
 make_dir_if_not_exits()
 srart_msg = '\n'+'='*100 + '\nTest Execution Started\n' + '='*100
 
-print(srart_msg)
+# print(srart_msg)
 logger.info(srart_msg)
 
 
@@ -21,7 +23,10 @@ x = SearchPage(driver)
 page_count = 1
 max_page_count = 10
 
+total_result = x.get_total_results()
+
 try:
+
     while (x.is_next_page_button_found() and page_count < max_page_count):
         print(f"Page {page_count} started")
         if x.is_item_price_pair_matched():
@@ -37,7 +42,7 @@ except Exception as e:
 
 finally:
     print('-'*100)
-    summery = f"Items Extracted = {x.i}, Total Items Found = {x.get_total_results()}, Remaining Items= {x.get_total_results()-x.i}"
+    summery = f"Items Extracted = {x.i}, Total Items Found = {total_result}, Remaining Items= {total_result-x.i}"
     print(summery)
     logger.info(summery)
     print('-'*100)
