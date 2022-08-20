@@ -10,4 +10,9 @@ PRICE_XPATH = "*//span[@class='s-item__price']"
 NEXT_PAGE_XPATH = "//*[@class='pagination__next icon-link']"
 TOTAL_RESULT_FOUND_XPATH = "*//div/h2[@class='srp-controls__count-heading']"
 ITEM_BOX_XPATH = "*//div[@class='s-item__wrapper clearfix']"
+MONGO_DB_NAME = "EBAY_DB_1"
+MONGO_COLLECTION_NAME = "ITEMS"
+USING_DOCKER = "YES"
+OUTPUT_FILE_NAME = 'EBAY_DB_1_DATA'
+SITE_NAME = 'EBAY'
 ```
