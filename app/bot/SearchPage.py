@@ -1,6 +1,7 @@
 from bot.base import BasePage
 from bot.locators import SearchResultPageLocators
-from utils.db import insert
+from utils.db.insert import insert as insert_to_db
+from utils.config.env import SITE_NAME
 
 
 class SearchPage(BasePage):
@@ -9,31 +10,6 @@ class SearchPage(BasePage):
         super().__init__(driver)
         self.driver.get(SearchResultPageLocators.URL)
         self.i = 0
-
-    def get_total_items(self):
-        self.item_name_list = self.get_elements(
-            *SearchResultPageLocators.ITEM_NAME)
-        return self.item_name_list
-
-    def count_total_items(self):
-        return len(self.get_total_items())
-
-    def get_total_prices(self):
-        self.item_price_list = self.get_elements(
-            *SearchResultPageLocators.ITEM_PRICE)
-        return self.item_price_list
-
-    def count_total_prices(self):
-        return len(self.get_total_prices())
-
-    def is_item_price_pair_matched(self):
-        return self.count_total_items() == self.count_total_prices()
-
-    def get_item_price_pair(self):
-        if self.is_item_price_pair_matched():
-            return zip(self.item_name_list, self.item_price_list)
-        else:
-            return None
 
     def get_total_results(self):
         x = self.get_element(
@@ -51,24 +27,6 @@ class SearchPage(BasePage):
         except:
             return len(self.get_item_box())
 
-    def save_item_price_pair(self, filename="test.txt"):
-        if self.get_item_price_pair() is None:
-            print("No item-price pair found!")
-            return
-        for item in self.get_item_price_pair():
-            with open(filename, 'a+') as f:
-                try:
-                    x = str(self.i) + ". " + item[0].text + \
-                        ": Price = " + item[1].text + "\n"
-                    x = x.encode("ascii", "ignore")
-                    x = x.decode()
-                    # print(x, type(x))
-                    f.write(x)
-
-                except Exception as e:
-                    print(e)
-            self.i += 1
-
     def insert_item_price_pair_into_mongo_db(self, site="ebay"):
 
         if len(self.get_item_box()) < 1:
@@ -77,7 +35,7 @@ class SearchPage(BasePage):
         cols = []
 
         for item in self.item_box:
-            print('-'*100, item, type(item))
+            # print('-'*100, item, type(item))
             try:
                 self.i += 1
                 id_, name, price = str(self.i), item.find_element(
@@ -87,7 +45,7 @@ class SearchPage(BasePage):
                     "ascii", "ignore"), price.encode("ascii", "ignore")
                 name, price = name.decode(), price.decode()
                 temp = {"id": id_, "item_name": name,
-                        "price": price, "site": site}
+                        "price": price, "site": SITE_NAME}
                 cols.append(temp)
 
             except Exception as e:
@@ -96,7 +54,7 @@ class SearchPage(BasePage):
         # Insert
         try:
             # insert.insert(data=cols, db_name='ebay_db', collection_name='items')
-            insert.insert(data=cols)
+            insert_to_db(data=cols)
         except Exception as e:
             print(e)
 
