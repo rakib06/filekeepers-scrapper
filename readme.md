@@ -9,7 +9,7 @@
 git clone https://github.com/rakib06/filekeepers-scrapper.git
 cd filekeepers-scrapper
 ```
-##### create a .env file like this [.env](https://github.com/rakib06/filekeepers-scrapper/blob/main/env.md), and then
+##### create a .env file like this [.env] at ```app/.env``` (https://github.com/rakib06/filekeepers-scrapper/blob/main/env.md), and then
 
 ```
 docker-compose build
