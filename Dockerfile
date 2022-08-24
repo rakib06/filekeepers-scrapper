@@ -2,7 +2,7 @@ FROM python:3.7-alpine
 
 ENV PYTHONBUFFERED 1
 COPY ./requirements.txt /requirements.txt
-COPY ./.env /.env
+COPY ./.envexample /.env
 RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install virtualenv
 RUN virtualenv venv 
